@@ -74,10 +74,10 @@ namespace Proyecto_Ferreteria_Marcelo
                         inventario.ListarMenosVendidos();
                         break;
                     case "4":
-                        // Listar los productos a surtir (stock mínimo)
+                        inventario.ListarProductosSurtir();
                         break;
                     case "5":
-                        // Lista de vendedores y cantidad de ventas realizadas
+                        inventario.ListarVendedoresPorVentas();
                         break;
                     case "0":
                         break;

@@ -225,7 +225,7 @@ namespace Proyecto_Ferreteria_Marcelo
             Interfaz.Continuar();
         }
 
-        public void ContratarVendedor()
+        public void ContratarVendedor()  // 6
         {
             Console.Clear();
             Console.WriteLine("===CONTRATAR VENDEDOR===");
@@ -310,17 +310,17 @@ namespace Proyecto_Ferreteria_Marcelo
                 return;
             }
 
-            Console.WriteLine("\n-----------------------------------------------------");
-            Console.WriteLine("| CÓDIGO  | NOMBRE           | PRECIO    | STOCK  |");
-            Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine("\n---------------------------------------------------------------------");
+            Console.WriteLine("| CÓDIGO  | NOMBRE           | PRECIO    | STOCK ACTUAL | STOCK MÍNIMO |");
+            Console.WriteLine("---------------------------------------------------------------------");
 
             foreach (var producto in Productos)
             {
                 Console.WriteLine($"| {producto.GetCodigo(),-7} | {producto.GetNombre(),-15} " +
-                                  $"| {producto.GetPrecio(),8:C} | {producto.GetStockActual(),6} |");
+                                  $"| {producto.GetPrecio(),8:C} | {producto.GetStockActual(),12} | {producto.GetStockMinimo(),12} |");
             }
 
-            Console.WriteLine("-----------------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------------------");
             Interfaz.Continuar();
         }
 
@@ -422,6 +422,72 @@ namespace Proyecto_Ferreteria_Marcelo
             }
 
             Console.WriteLine("-------------------------------------------------");
+            Interfaz.Continuar();
+        }
+
+        public void ListarProductosSurtir()  // 8.4
+        {
+            Console.Clear();
+            Console.WriteLine("=== PRODUCTOS A SURTIR ===");
+
+            if (Productos.Count == 0)
+            {
+                Interfaz.Error("No hay productos registrados");
+                Interfaz.Continuar();
+                return;
+            }
+
+            var productos_a_surtir = Productos.Where(p => p.GetStockActual() <= p.GetStockMinimo()).OrderBy(p => p.GetNombre()).ToList();
+
+            if (productos_a_surtir.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n¡Todos los productos tienen stock suficiente!");
+                Console.ResetColor();
+                Interfaz.Continuar();
+                return;
+            }
+
+            Console.WriteLine("\n---------------------------------------------------------------------");
+            Console.WriteLine("| CÓDIGO  | NOMBRE           | STOCK ACTUAL | STOCK MÍNIMO | A REPONER |");
+            Console.WriteLine("---------------------------------------------------------------------");
+
+            foreach (var producto in productos_a_surtir)
+            {
+                int reponer = producto.GetStockMinimo() - producto.GetStockActual();
+                Console.WriteLine($"| {producto.GetCodigo(),-7} | {producto.GetNombre(),-15} " +
+                                  $"| {producto.GetStockActual(),12} | {producto.GetStockMinimo(),12} | {reponer,9} |");
+            }
+
+            Console.WriteLine("---------------------------------------------------------------------");
+            Interfaz.Continuar();
+        }
+
+        public void ListarVendedoresPorVentas()  // 8.5
+        {
+            Console.Clear();
+            Console.WriteLine("=== VENDEDORES POR CANTIDAD DE VENTAS ===");
+
+            if (Vendedores.Count == 0)
+            {
+                Interfaz.Error("No hay vendedores registrados");
+                Interfaz.Continuar();
+                return;
+            }
+
+            var vendedores_ordenados = Vendedores.OrderByDescending(v => v.GetVentasRealizadas()).ToList();
+
+            Console.WriteLine("\n------------------------------------------");
+            Console.WriteLine("| PUESTO | NOMBRE          | VENTAS REALIZADAS |");
+            Console.WriteLine("------------------------------------------");
+
+            for (int i = 0; i < vendedores_ordenados.Count; i++)
+            {
+                string puesto = (i + 1).ToString() + "°";
+                Console.WriteLine($"| {puesto,-6} | {vendedores_ordenados[i].GetNombre(),-14} | {vendedores_ordenados[i].GetVentasRealizadas(),17} |");
+            }
+
+            Console.WriteLine("------------------------------------------");
             Interfaz.Continuar();
         }
 
