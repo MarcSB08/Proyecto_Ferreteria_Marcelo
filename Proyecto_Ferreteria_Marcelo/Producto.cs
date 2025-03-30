@@ -64,7 +64,7 @@ namespace Proyecto_Ferreteria_Marcelo
             Nombre = Console.ReadLine();
 
             Console.Write("-Ingrese el código: ");
-            Codigo = Console.ReadLine();
+            Codigo = Console.ReadLine().ToUpper();
 
             Precio = ValidarPrecio();
             StockActual = ValidarStockActual();

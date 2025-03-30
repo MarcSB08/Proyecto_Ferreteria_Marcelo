@@ -33,7 +33,6 @@ namespace Proyecto_Ferreteria_Marcelo
         public int GetVentasRealizadas() => VentasRealizadas;
         public void AumentarVentas() => VentasRealizadas++;
 
-
         #endregion
     }
 }

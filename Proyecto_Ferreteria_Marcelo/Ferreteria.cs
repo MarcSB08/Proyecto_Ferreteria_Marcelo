@@ -35,15 +35,51 @@ namespace Proyecto_Ferreteria_Marcelo
                         inventario.EliminarProducto();
                         break;
                     case "6":
-                        inventario.EliminarVendedor();
+                        inventario.ContratarVendedor();
                         break;
                     case "7":
-                        Interfaz.Submenu_Listas();
+                        inventario.EliminarVendedor();
+                        break;
+                    case "8":
+                        Listas(inventario);
                         break;
                     case "0":
                         Console.Clear();
                         Console.WriteLine("Gracias por utilizar el programa :D");
                         Interfaz.Continuar();
+                        break;
+                    default:
+                        Interfaz.Error("Opción no válida");
+                        Interfaz.Continuar();
+                        break;
+                }
+            } while (opcion != "0");
+        }
+
+        public void Listas(Inventario inventario)
+        {
+            string opcion;
+            do
+            {
+                opcion = Interfaz.Submenu_Listas();
+                switch (opcion)
+                {
+                    case "1":
+                        inventario.ListarProductos();
+                        break;
+                    case "2":
+                        inventario.ListarMasVendidos();
+                        break;
+                    case "3":
+                        inventario.ListarMenosVendidos();
+                        break;
+                    case "4":
+                        // Listar los productos a surtir (stock mínimo)
+                        break;
+                    case "5":
+                        // Lista de vendedores y cantidad de ventas realizadas
+                        break;
+                    case "0":
                         break;
                     default:
                         Interfaz.Error("Opción no válida");

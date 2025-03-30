@@ -14,13 +14,14 @@ namespace Proyecto_Ferreteria_Marcelo
         {
             Console.Clear();
             Console.WriteLine("Seleccione una opción:\n");
-            Console.WriteLine("<1> Ingresar un producto nuevo");
-            Console.WriteLine("<2> Buscar un producto por su código");
-            Console.WriteLine("<3> Modificar el stock y precio de un producto dado");
-            Console.WriteLine("<4> Procesar una venta");
-            Console.WriteLine("<5> Eliminar un producto dado su código");
-            Console.WriteLine("<6> Eliminar a un vendedor");
-            Console.WriteLine("<7> Listas");
+            Console.WriteLine("<1> Ingresar un Producto Nuevo");
+            Console.WriteLine("<2> Buscar un Producto por su Código");
+            Console.WriteLine("<3> Modificar el Stock y Precio de un Producto dado");
+            Console.WriteLine("<4> Procesar una Venta");
+            Console.WriteLine("<5> Eliminar un Producto dado su Código");
+            Console.WriteLine("<6> Contratar a un Vendedor");
+            Console.WriteLine("<7> Eliminar a un Vendedor");
+            Console.WriteLine("<8> Listas");
             Console.WriteLine("<0> Salir");
             Console.Write("\nOpción: ");
             string opcion = Console.ReadLine();
