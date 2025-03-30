@@ -143,6 +143,7 @@ namespace Proyecto_Ferreteria_Marcelo
                     else if (cantidad > stock_actual)
                     {
                         msj = "La cantidad no puede ser mayor que el stock disponible";
+                        key = true;
                     }
                     else
                     {

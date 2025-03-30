@@ -120,33 +120,167 @@ namespace Proyecto_Ferreteria_Marcelo
             Interfaz.Continuar();
         }
 
+        public void RegistrarVendedor(string nombre)  // Método para registrar un vendedor nuevo
+        {
+            if (!Vendedores.Any(v => v.GetNombre() == nombre))
+            {
+                Vendedores.Add(new Vendedor(nombre, 0));
+            }
+        }
+
         public void ProcesarVenta()  // 4
         {
             Console.Clear();
             Console.WriteLine("===PROCESAR VENTA===");
-            
-            Console.Write("\n-Ingrese el nombre del producto: ");
-            string nombre = Console.ReadLine();
-            Producto producto = Productos.FirstOrDefault(p => p.GetNombre() == nombre);
-            if (producto != null)
+
+            if (Productos.Count == 0)
             {
-                Console.WriteLine("\nDATOS DEL PRODUCTO:");
-                Console.WriteLine($"\nNombre: {producto.GetNombre()}");
-                Console.WriteLine($"Precio: {producto.GetPrecio()}$");
-                Console.WriteLine($"Stock actual: {producto.GetStockActual()}");
-
-                Console.Write("\n-Ingrese la cantidad: ");
-                int cantidad = Producto.ValidarCantidad(producto.GetStockActual());
-
-                Console.Write("\n-Ingrese el nombre del vendedor: ");
-                string nombre_vendedor = Console.ReadLine();
-
-
+                Interfaz.Error("No hay productos ingresados. No se puede procesar ninguna venta");
             }
             else
             {
-                Interfaz.Error("No se encontró un producto con ese nombre");
+                Console.Write("\n-Ingrese el nombre del producto: ");
+                string nombre = Console.ReadLine();
+                Producto producto = Productos.FirstOrDefault(p => p.GetNombre() == nombre);
+
+                if (producto != null)
+                {
+                    Console.WriteLine("\nDATOS DEL PRODUCTO:");
+                    Console.WriteLine($"\nNombre: {producto.GetNombre()}");
+                    Console.WriteLine($"Precio: {producto.GetPrecio()}$");
+                    Console.WriteLine($"Stock actual: {producto.GetStockActual()}");
+
+                    int cantidad = Producto.ValidarCantidad(producto.GetStockActual());
+
+                    Console.Write("\n-Ingrese el nombre del vendedor: ");
+                    string nombre_vendedor = Console.ReadLine();
+
+                    // Si el vendedor no existe, se crea uno nuevo
+                    Vendedor vendedor = Vendedores.FirstOrDefault(v => v.GetNombre() == nombre_vendedor);
+                    if (vendedor == null)
+                    {
+                        vendedor = new Vendedor(nombre_vendedor, 0);
+                        Vendedores.Add(vendedor);
+                    }
+
+                    producto.ReducirStock(cantidad);
+                    vendedor.AumentarVentas();
+                    Venta venta = new Venta(producto, vendedor, cantidad);
+                    Ventas.Add(venta);
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\nVenta procesada exitosamente");
+                    Console.ResetColor();
+                    Interfaz.Continuar();
+                    venta.GenerarFactura();
+                }
+                else
+                {
+                    Interfaz.Error("No se encontró un producto con ese nombre");
+                }
             }
+            Interfaz.Continuar();
+        }
+
+        public void EliminarProducto()  // 5
+        {
+            Console.Clear();
+            Console.WriteLine("===ELIMINAR PRODUCTO POR CÓDIGO===");
+            if (Productos.Count == 0)
+            {
+                Interfaz.Error("No hay productos ingresados");
+            }
+            else
+            {
+                string op = "";
+                Console.Write("\n-Ingrese el código del producto a eliminar: ");
+                string codigo = Console.ReadLine();
+                Producto producto = Productos.FirstOrDefault(p => p.GetCodigo() == codigo);
+                if (producto != null)
+                {
+                    do
+                    {
+                        Console.WriteLine($"¿Está seguro que desea eliminar el producto '{producto.GetNombre()}'?");
+                        Console.Write("-Opción (SI/NO): ");
+                        op = Console.ReadLine();
+
+                        if (op.ToUpper() == "SI")
+                        {
+                            Productos.Remove(producto);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("\nProducto eliminado exitosamente");
+                            Console.ResetColor();
+                        }
+                        else if (op.ToUpper() == "NO")
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.WriteLine("\nOperación cancelada");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Interfaz.Error("Opción inválida");
+                        }
+                    } while (op.ToUpper() != "SI" && op.ToUpper() != "NO");
+                }
+                else
+                {
+                    Interfaz.Error("No se encontró un producto con ese código");
+                }
+            }
+            Interfaz.Continuar();
+        }
+
+        public void EliminarVendedor()  // 6
+        {
+            Console.Clear();
+            Console.WriteLine("===ELIMINAR VENDEDOR POR NOMBRE===");
+
+            if (Vendedores.Count == 0)
+            {
+                Interfaz.Error("No hay vendedores registrados");
+            }
+            else
+            {
+                string op = "";
+                Console.Write("-Ingrese el nombre del vendedor a eliminar: ");
+                string nombre = Console.ReadLine();
+
+                Vendedor vendedor = Vendedores.FirstOrDefault(v => v.GetNombre() == nombre);
+
+                if (vendedor != null)
+                {
+                    do
+                    {
+                        Console.WriteLine($"¿Está seguro que desea eliminar el producto '{vendedor.GetNombre()}'?");
+                        Console.Write("-Opción (SI/NO): ");
+                        op = Console.ReadLine();
+
+                        if (op.ToUpper() == "SI")
+                        {
+                            Vendedores.Remove(vendedor);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("\nProducto eliminado exitosamente");
+                            Console.ResetColor();
+                        }
+                        else if (op.ToUpper() == "NO")
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.WriteLine("\nOperación cancelada");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Interfaz.Error("Opción inválida");
+                        }
+                    } while (op.ToUpper() != "SI" && op.ToUpper() != "NO");
+                }
+                else
+                {
+                    Interfaz.Error("No se encontró ningún vendedor con ese nombre");
+                }
+            }
+            Interfaz.Continuar();
         }
 
         #endregion

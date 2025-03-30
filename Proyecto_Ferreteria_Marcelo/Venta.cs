@@ -32,7 +32,25 @@ namespace Proyecto_Ferreteria_Marcelo
             Fecha = DateTime.Now;
         }
 
+        #endregion
+
+        #region Métodos
+
         public double CalcularTotal() => ProductoVendido.GetPrecio() * Cantidad;
+
+        public void GenerarFactura()
+        {
+            Console.Clear();
+            Console.WriteLine("===FACTURA DE VENTA===");
+            Console.WriteLine($"Fecha: {Fecha}");
+            Console.WriteLine($"Producto: {ProductoVendido.GetNombre()}");
+            Console.WriteLine($"(Código: {ProductoVendido.GetCodigo()})");
+            Console.WriteLine($"Precio unitario: {ProductoVendido.GetPrecio()}$");
+            Console.WriteLine($"Cantidad: {Cantidad}");
+            Console.WriteLine($"Vendedor: {Vendedor.GetNombre()} (Ventas: {Vendedor.GetVentasRealizadas()})");
+            Console.WriteLine("--------------------------");
+            Console.WriteLine($"TOTAL A PAGAR: {CalcularTotal()}$");
+        }
 
         #endregion
     }

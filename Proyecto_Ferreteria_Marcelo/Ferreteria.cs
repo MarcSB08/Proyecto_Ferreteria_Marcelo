@@ -32,8 +32,10 @@ namespace Proyecto_Ferreteria_Marcelo
                         inventario.ProcesarVenta();
                         break;
                     case "5":
+                        inventario.EliminarProducto();
                         break;
                     case "6":
+                        inventario.EliminarVendedor();
                         break;
                     case "7":
                         Interfaz.Submenu_Listas();
