@@ -22,6 +22,7 @@ namespace Proyecto_Ferreteria_Marcelo
             Console.WriteLine("<6> Contratar a un Vendedor");
             Console.WriteLine("<7> Eliminar a un Vendedor");
             Console.WriteLine("<8> Listas");
+            Console.WriteLine("<ADMIN> Eliminar todos los datos registrados");
             Console.WriteLine("<0> Salir");
             Console.Write("\nOpción: ");
             string opcion = Console.ReadLine();

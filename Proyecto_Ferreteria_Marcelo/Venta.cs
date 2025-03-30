@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ferreteria_Marcelo
 {
-    internal class Venta
+    [Serializable]
+    public class Venta
     {
         #region Atributos
 
-        private Producto ProductoVendido { get; set; }
-        private Vendedor Vendedor { get; set; }
-        private int Cantidad { get; set; }
-        private DateTime Fecha { get; set; }
+        public Producto ProductoVendido { get; set; }
+        public Vendedor Vendedor { get; set; }
+        public int Cantidad { get; set; }
+        public DateTime Fecha { get; set; }
 
         #endregion
 
@@ -36,18 +37,18 @@ namespace Proyecto_Ferreteria_Marcelo
 
         #region Métodos
 
-        public double CalcularTotal() => ProductoVendido.GetPrecio() * Cantidad;
+        public double CalcularTotal() => ProductoVendido.Precio * Cantidad;
 
         public void GenerarFactura()
         {
             Console.Clear();
             Console.WriteLine("===FACTURA DE VENTA===");
             Console.WriteLine($"Fecha: {Fecha}");
-            Console.WriteLine($"Producto: {ProductoVendido.GetNombre()}");
-            Console.WriteLine($"Código: {ProductoVendido.GetCodigo()}");
-            Console.WriteLine($"Precio unitario: {ProductoVendido.GetPrecio()}$");
+            Console.WriteLine($"Producto: {ProductoVendido.Nombre}");
+            Console.WriteLine($"Código: {ProductoVendido.Codigo}");
+            Console.WriteLine($"Precio unitario: {ProductoVendido.Precio}$");
             Console.WriteLine($"Cantidad: {Cantidad}");
-            Console.WriteLine($"Vendedor: {Vendedor.GetNombre()} (Ventas: {Vendedor.GetVentasRealizadas()})");
+            Console.WriteLine($"Vendedor: {Vendedor.Nombre} (Ventas: {Vendedor.VentasRealizadas})");
             Console.WriteLine("--------------------------");
             Console.WriteLine($"TOTAL A PAGAR: {CalcularTotal()}$");
         }

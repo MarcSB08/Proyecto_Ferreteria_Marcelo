@@ -17,7 +17,7 @@ namespace Proyecto_Ferreteria_Marcelo
             do
             {
                 opcion = Interfaz.Menu_Principal();
-                switch (opcion)
+                switch (opcion.ToUpper())
                 {
                     case "1":
                         inventario.IngresarProducto();
@@ -42,6 +42,9 @@ namespace Proyecto_Ferreteria_Marcelo
                         break;
                     case "8":
                         Listas(inventario);
+                        break;
+                    case "ADMIN":
+                        inventario.EliminarTodo();
                         break;
                     case "0":
                         Console.Clear();

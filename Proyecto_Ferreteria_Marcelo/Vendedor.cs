@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ferreteria_Marcelo
 {
-    internal class Vendedor
+    [Serializable]
+    public class Vendedor
     {
         #region Atributos
 
-        private string Nombre { get; set; }
-        private int VentasRealizadas { get; set; }
+        public string Nombre { get; set; }
+        public int VentasRealizadas { get; set; }
 
         #endregion
 
@@ -29,8 +30,6 @@ namespace Proyecto_Ferreteria_Marcelo
 
         #region Métodos
 
-        public string GetNombre() => Nombre;
-        public int GetVentasRealizadas() => VentasRealizadas;
         public void AumentarVentas() => VentasRealizadas++;
 
         #endregion

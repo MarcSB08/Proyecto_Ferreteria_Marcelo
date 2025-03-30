@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Ferreteria_Marcelo
 {
-    internal class Producto
+    [Serializable]
+    public class Producto
     {
         #region Atributos
 
-        private string Nombre { get; set; }
-        private string Codigo { get; set; }
-        private double Precio { get; set; }
-        private int StockActual { get; set; }
-        private int StockMinimo { get; set; }
-        private string Descripcion { get; set; }
-        private int Vendidos { get; set; }
+        public string Nombre { get; set; }
+        public string Codigo { get; set; }
+        public double Precio { get; set; }
+        public int StockActual { get; set; }
+        public int StockMinimo { get; set; }
+        public string Descripcion { get; set; }
+        public int Vendidos { get; set; }
 
         #endregion
 
@@ -41,43 +42,8 @@ namespace Proyecto_Ferreteria_Marcelo
         #endregion
 
         #region Métodos
-        
-        // Métodos públicos para obtener los atributos privados en otras clases
-        public string GetNombre() => Nombre;
-        public string GetCodigo() => Codigo;
-        public double GetPrecio() => Precio;
-        public int GetStockActual() => StockActual;
-        public int GetStockMinimo() => StockMinimo;
-        public string GetDescripcion() => Descripcion;
-        public int GetVendidos() => Vendidos;
-        public double SetPrecio(double precio) => Precio = precio;
-        public int SetStockActual(int stock_actual) => StockActual = stock_actual;
-        public int SetStockMinimo(int stock_minimo) => StockMinimo = stock_minimo;
 
-        // Crea el producto a ingresar tomando sus atributos
-        public Producto CrearProducto()
-        {
-            Console.Clear();
-            Console.WriteLine("===AGREGAR UN PRODUCTO===");
-
-            Console.Write("\n-Ingrese el nombre: ");
-            Nombre = Console.ReadLine();
-
-            Console.Write("-Ingrese el código: ");
-            Codigo = Console.ReadLine().ToUpper();
-
-            Precio = ValidarPrecio();
-            StockActual = ValidarStockActual();
-            StockMinimo = ValidarStockMinimo(StockActual);
-
-            Console.Write("-Ingrese la descripción: ");
-            Descripcion = Console.ReadLine();
-
-            return new Producto(Nombre, Codigo, Precio, StockActual, StockMinimo, Descripcion, Vendidos);
-        }
-
-        // Reduce el stock del producto y aumenta la cantidad vendida cuando se procesa una venta
-        public void ReducirStock(int cantidad)
+        public void ReducirStock(int cantidad)  // Reduce el stock del producto y aumenta la cantidad vendida cuando se procesa una venta
         {
             StockActual -= cantidad;
             Vendidos += cantidad;
