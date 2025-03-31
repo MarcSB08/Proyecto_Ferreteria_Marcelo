@@ -32,37 +32,40 @@ namespace Proyecto_Ferreteria_Marcelo
 
         public void IngresarProducto()  // 1
         {
+            int x = 8, y = 5;
             Producto nuevo_producto = new Producto();
+
             Console.Clear();
-            Console.WriteLine("===INGRESAR UN PRODUCTO===");
+            Console.ForegroundColor = ConsoleColor.DarkGreen; Interfaz.Borde();
+            Interfaz.xy(48, 3); Console.Write("===INGRESAR UN PRODUCTO==="); Console.ResetColor();
 
-            Console.Write("\n-Ingrese el nombre: ");
-            nuevo_producto.Nombre = Console.ReadLine();
-
-            Console.Write("-Ingrese el código: ");
-            nuevo_producto.Codigo = Console.ReadLine().ToUpper();
+            Interfaz.xy(x, y++); Console.Write("-Ingrese el nombre: ");
+            nuevo_producto.Nombre = Console.ReadLine(); y++;
 
             do
             {
+                Interfaz.xy(x, y); Console.Write("-Ingrese el código: ");
+                nuevo_producto.Codigo = Console.ReadLine().ToUpper();
+
                 if (Productos.Exists(p => p.Codigo == nuevo_producto.Codigo))
                 {
-                    Interfaz.Error("Ya existe un producto con ese código");
-                    Interfaz.Continuar();
-                    return;
+                    Interfaz.xy(x, y); Interfaz.Error("Ya existe un producto con ese código");
+                    Console.ReadKey();
+                    Interfaz.xy(x, y); Console.Write("                                               ");
                 }
             } while (Productos.Exists(p => p.Codigo == nuevo_producto.Codigo));
 
-            nuevo_producto.Precio = Producto.ValidarPrecio();
-            nuevo_producto.StockActual = Producto.ValidarStockActual();
-            nuevo_producto.StockMinimo = Producto.ValidarStockMinimo(nuevo_producto.StockActual);
+            y += 2; nuevo_producto.Precio = Producto.ValidarPrecio(y);
+            y += 2; nuevo_producto.StockActual = Producto.ValidarStockActual(y);
+            y += 2; nuevo_producto.StockMinimo = Producto.ValidarStockMinimo(nuevo_producto.StockActual, y);
 
-            Console.Write("-Ingrese la descripción: ");
+            y += 2; Interfaz.xy(x, y); Console.Write("-Ingrese la descripción: ");
             nuevo_producto.Descripcion = Console.ReadLine();
 
             Productos.Add(nuevo_producto);
             Archivo.GuardarProductos(Productos);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Producto ingresado correctamente!");
+            y += 2; Interfaz.xy(x, y); Console.WriteLine("Producto ingresado correctamente!");
             Console.ResetColor();
 
             Interfaz.Continuar();
@@ -70,61 +73,68 @@ namespace Proyecto_Ferreteria_Marcelo
 
         public void BuscarPorCodigo()  // 2
         {
+            int x = 8, y = 5;
+
             Console.Clear();
-            Console.WriteLine("===BUSCAR PRODUCTO POR CÓDIGO===");
+            Console.ForegroundColor = ConsoleColor.Magenta; Interfaz.Borde();
+            Interfaz.xy(45, 3); Console.Write("===BUSCAR PRODUCTO POR CÓDIGO==="); Console.ResetColor();
 
             if (Productos.Count == 0)
             {
-                Interfaz.Error("No hay productos ingresados");
+                Interfaz.xy(x, y++); Interfaz.Error("No hay productos ingresados");
                 Interfaz.Continuar();
                 return;
             }
 
-            Console.Write("\n-Ingrese el código del producto: ");
+            Interfaz.xy(x, y++); Console.Write("-Ingrese el código del producto: ");
             string codigo = Console.ReadLine().ToUpper();
             Producto producto = Productos.Find(p => p.Codigo == codigo);
             if (producto != null)
             {
-                Console.WriteLine($"\nNombre: {producto.Nombre}");
-                Console.WriteLine($"Código: {producto.Codigo}");
-                Console.WriteLine($"Precio: ${producto.Precio}");
-                Console.WriteLine($"Stock actual: {producto.StockActual}");
-                Console.WriteLine($"Stock mínimo: {producto.StockMinimo}");
-                Console.WriteLine($"Descripción: {producto.Descripcion}");
+                y++;
+                Interfaz.xy(x, y++); Console.WriteLine($"Nombre: {producto.Nombre}");
+                Interfaz.xy(x, y++); Console.WriteLine($"Código: {producto.Codigo}");
+                Interfaz.xy(x, y++); Console.WriteLine($"Precio: ${producto.Precio}");
+                Interfaz.xy(x, y++); Console.WriteLine($"Stock actual: {producto.StockActual}");
+                Interfaz.xy(x, y++); Console.WriteLine($"Stock mínimo: {producto.StockMinimo}");
+                Interfaz.xy(x, y++); Console.WriteLine($"Descripción: {producto.Descripcion}");
             }
             else
             {
-                Interfaz.Error("No se encontró un producto con ese código");
+                Interfaz.xy(x, y++); Interfaz.Error("No se encontró un producto con ese código");
             }
             Interfaz.Continuar();
         }
 
         public void ModificarProducto()  // 3
         {
+            int x = 8, y = 5;
+
             Console.Clear();
-            Console.WriteLine("===MODIFICAR STOCK Y PRECIO DE UN PRODUCTO===");
+            Console.ForegroundColor = ConsoleColor.DarkCyan; Interfaz.Borde();
+            Interfaz.xy(45, 3); Console.Write("===MODIFICAR PRODUCTO==="); Console.ResetColor();
 
             if (Productos.Count == 0)
             {
-                Interfaz.Error("No hay productos ingresados");
+                Interfaz.xy(x, y++); Interfaz.Error("No hay productos ingresados");
                 Interfaz.Continuar();
                 return;
             }
 
-            Console.Write("-Ingrese el código del producto a modificar: ");
+            Interfaz.xy(x, y++); Console.Write("-Ingrese el código del producto a modificar: ");
             string codigo = Console.ReadLine().ToUpper();
             Producto producto = Productos.FirstOrDefault(p => p.Codigo == codigo);
             if (producto != null)
             {
-                Console.WriteLine($"\nEl producto '{producto.Nombre}' de código '{producto.Codigo}' fue encontrado");
-                Console.WriteLine("\nDATOS ACTUALES DE STOCK Y PRECIO:");
-                Console.WriteLine($"-Precio: {producto.Precio}$");
-                Console.WriteLine($"-Stock actual: {producto.StockActual}");
-                Console.WriteLine($"-Stock mínimo: {producto.StockMinimo}\n");
+                Interfaz.xy(x, y++); Console.WriteLine($"El producto '{producto.Nombre}' de código '{producto.Codigo}' fue encontrado"); y++;
+                Interfaz.xy(x, y++); Console.WriteLine("DATOS ACTUALES DE STOCK Y PRECIO:");
+                Interfaz.xy(x, y++); Console.WriteLine($"-Precio: {producto.Precio}$");
+                Interfaz.xy(x, y++); Console.WriteLine($"-Stock actual: {producto.StockActual}");
+                Interfaz.xy(x, y++); Console.WriteLine($"-Stock mínimo: {producto.StockMinimo}");
 
-                double nuevo_precio = Producto.ValidarPrecio();
-                int nuevo_stock_actual = Producto.ValidarStockActual();
-                int nuevo_stock_minimo = Producto.ValidarStockMinimo(nuevo_stock_actual);
+                y++; double nuevo_precio = Producto.ValidarPrecio(y);
+                y++; int nuevo_stock_actual = Producto.ValidarStockActual(y);
+                y++; int nuevo_stock_minimo = Producto.ValidarStockMinimo(nuevo_stock_actual, y);
 
                 producto.Precio = nuevo_precio;
                 producto.StockActual = nuevo_stock_actual;
@@ -132,53 +142,55 @@ namespace Proyecto_Ferreteria_Marcelo
                 Archivo.GuardarProductos(Productos);
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\nEl producto ha sido modificado exitosamente.");
+                y++; Interfaz.xy(x, y++); Console.WriteLine("El producto ha sido modificado exitosamente.");
                 Console.ResetColor();
             }
             else
             {
-                Interfaz.Error("No se encontró un producto con ese código");
+                Interfaz.xy(x, y++); Interfaz.Error("No se encontró un producto con ese código");
             }
             Interfaz.Continuar();
         }
 
         public void ProcesarVenta()  // 4
         {
+            int x = 8, y = 5;
             Console.Clear();
-            Console.WriteLine("===PROCESAR VENTA===");
+            Console.ForegroundColor = ConsoleColor.DarkRed; Interfaz.Borde();
+            Interfaz.xy(48, 3); Console.Write("===PROCESAR VENTA==="); Console.ResetColor();
 
             if (Productos.Count == 0)
             {
-                Interfaz.Error("No hay productos ingresados. No se puede procesar ninguna venta");
+                Interfaz.xy(x, y++); Interfaz.Error("No hay productos ingresados. No se puede procesar ninguna venta");
                 Interfaz.Continuar();
                 return;
             }
 
             if (Vendedores.Count == 0)
             {
-                Interfaz.Error("No hay vendedores contratados. No se puede procesar ninguna venta");
+                Interfaz.xy(x, y++); Interfaz.Error("No hay vendedores contratados. No se puede procesar ninguna venta");
                 Interfaz.Continuar();
                 return;
             }
 
-            Console.Write("\n-Ingrese el nombre del producto: ");
+            Interfaz.xy(x, y++); Console.Write("-Ingrese el nombre del producto: ");
             string nombre = Console.ReadLine();
             Producto producto = Productos.FirstOrDefault(p => p.Nombre == nombre);
 
             if (producto != null)
             {
-                Console.WriteLine("\nDATOS DEL PRODUCTO:");
-                Console.WriteLine($"\nNombre: {producto.Nombre}");
-                Console.WriteLine($"Código: {producto.Codigo}");
-                Console.WriteLine($"Precio: {producto.Precio}$");
-                Console.WriteLine($"Stock actual: {producto.StockActual}\n");
+                y++; Interfaz.xy(x, y++); Console.WriteLine("DATOS DEL PRODUCTO:");
+                Interfaz.xy(x, y++); Console.WriteLine($"Nombre: {producto.Nombre}");
+                Interfaz.xy(x, y++); Console.WriteLine($"Código: {producto.Codigo}");
+                Interfaz.xy(x, y++); Console.WriteLine($"Precio: {producto.Precio}$");
+                Interfaz.xy(x, y++); Console.WriteLine($"Stock actual: {producto.StockActual}");
 
-                int cantidad = Producto.ValidarCantidad(producto.StockActual);
+                y++; int cantidad = Producto.ValidarCantidad(producto.StockActual, y);
 
-                Console.Write("\n-Ingrese el nombre del vendedor: ");
+                y += 2; Interfaz.xy(x, y++); Console.Write("-Ingrese el nombre del vendedor: ");
                 string nombre_vendedor = Console.ReadLine();
 
-                Vendedor vendedor = Vendedores.FirstOrDefault(v => v.Nombre == nombre_vendedor);
+                Vendedor vendedor = Vendedores.FirstOrDefault(v => v.Nombre.ToLower() == nombre_vendedor.ToLower());
                 if (vendedor == null)
                 {
                     Interfaz.Error("No existe un vendedor con ese nombre");
@@ -196,40 +208,42 @@ namespace Proyecto_Ferreteria_Marcelo
                 Archivo.GuardarVentas(Ventas);
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\nVenta procesada exitosamente");
+                y++; Interfaz.xy(x, y++); Console.WriteLine("Venta procesada exitosamente");
                 Console.ResetColor();
                 Interfaz.Continuar();
                 venta.GenerarFactura();
             }
             else
             {
-                Interfaz.Error("No se encontró un producto con ese nombre");
+                Interfaz.xy(x, y++); Interfaz.Error("No se encontró un producto con ese nombre");
             }
             Interfaz.Continuar();
         }
 
         public void EliminarProducto()  // 5
         {
+            int x = 8, y = 5;
             Console.Clear();
-            Console.WriteLine("===ELIMINAR PRODUCTO POR CÓDIGO===");
+            Console.ForegroundColor = ConsoleColor.Cyan; Interfaz.Borde();
+            Interfaz.xy(48, 3); Console.Write("===ELIMINAR PRODUCTO==="); Console.ResetColor();
 
             if (Productos.Count == 0)
             {
-                Interfaz.Error("No hay productos ingresados");
+                Interfaz.xy(x, y++); Interfaz.Error("No hay productos ingresados");
                 Interfaz.Continuar();
                 return;
             }
 
             string op = "";
-            Console.Write("\n-Ingrese el código del producto a eliminar: ");
+            Interfaz.xy(x, y++); Console.Write("-Ingrese el código del producto a eliminar: ");
             string codigo = Console.ReadLine().ToUpper();
             Producto producto = Productos.FirstOrDefault(p => p.Codigo == codigo);
             if (producto != null)
             {
                 do
                 {
-                    Console.WriteLine($"¿Está seguro que desea eliminar el producto '{producto.Nombre}'?");
-                    Console.Write("-Opción (SI/NO): ");
+                    y++; Interfaz.xy(x, y++); Console.WriteLine($"¿Está seguro que desea eliminar el producto '{producto.Nombre}'?");
+                    Interfaz.xy(x, y++); Console.Write("-Opción (SI/NO): ");
                     op = Console.ReadLine();
 
                     if (op.ToUpper() == "SI")
@@ -246,45 +260,48 @@ namespace Proyecto_Ferreteria_Marcelo
                         }
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("\nProducto eliminado exitosamente");
+                        y++; Interfaz.xy(x, y++); Console.WriteLine("Producto eliminado exitosamente");
                         Console.ResetColor();
                     }
                     else if (op.ToUpper() == "NO")
                     {
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        Console.WriteLine("\nOperación cancelada");
+                        y++; Interfaz.xy(x, y++); Console.WriteLine("Operación cancelada");
                         Console.ResetColor();
                     }
                     else
                     {
-                        Interfaz.Error("Opción inválida");
+                        Interfaz.xy(x, y++); Interfaz.Error("Opción inválida");
                     }
                 } while (op.ToUpper() != "SI" && op.ToUpper() != "NO");
             }
             else
             {
-                Interfaz.Error("No se encontró un producto con ese código");
+                y++; Interfaz.xy(x, y++); Interfaz.Error("No se encontró un producto con ese código");
             }
             Interfaz.Continuar();
         }
 
         public void ContratarVendedor()  // 6
         {
+            int x = 8, y = 5;
             Console.Clear();
-            Console.WriteLine("===CONTRATAR VENDEDOR===");
-            Console.Write("\n-Ingrese el nombre del vendedor: ");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta; Interfaz.Borde();
+            Interfaz.xy(48, 3); Console.Write("===CONTRATAR VENDEDOR==="); Console.ResetColor();
+
+            Interfaz.xy(x, y++); Console.Write("-Ingrese el nombre del vendedor: ");
             string nombre = Console.ReadLine();
 
             if (Vendedores.Exists(v => v.Nombre == nombre))
             {
-                Interfaz.Error("Ya existe un vendedor con ese nombre");
+                y++; Interfaz.xy(48, 3); Interfaz.Error("Ya existe un vendedor con ese nombre");
             }
             else
             {
                 Vendedores.Add(new Vendedor(nombre, 0));
                 Archivo.GuardarVendedores(Vendedores);
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Vendedor contratado exitosamente");
+                Interfaz.xy(x, y + 1); Console.WriteLine("Vendedor contratado exitosamente");
                 Console.ResetColor();
             }
             Interfaz.Continuar();
@@ -292,28 +309,30 @@ namespace Proyecto_Ferreteria_Marcelo
 
         public void EliminarVendedor()  // 7
         {
+            int x = 8, y = 5;
             Console.Clear();
-            Console.WriteLine("===ELIMINAR VENDEDOR===");
+            Console.ForegroundColor = ConsoleColor.Green; Interfaz.Borde();
+            Interfaz.xy(48, 3); Console.Write("===ELIMINAR VENDEDOR==="); Console.ResetColor();
 
             if (Vendedores.Count == 0)
             {
-                Interfaz.Error("No hay vendedores registrados");
+                Interfaz.xy(x, y++); Interfaz.Error("No hay vendedores registrados");
                 Interfaz.Continuar();
                 return;
             }
 
             string op = "";
-            Console.Write("-Ingrese el nombre del vendedor a eliminar: ");
+            Interfaz.xy(x, y++); Console.Write("-Ingrese el nombre del vendedor a eliminar: ");
             string nombre = Console.ReadLine();
 
-            Vendedor vendedor = Vendedores.FirstOrDefault(v => v.Nombre == nombre);
+            Vendedor vendedor = Vendedores.FirstOrDefault(v => v.Nombre.ToLower() == nombre.ToLower());
 
             if (vendedor != null)
             {
                 do
                 {
-                    Console.WriteLine($"¿Está seguro que desea eliminar a este vendedor?");
-                    Console.Write("-Opción (SI/NO): ");
+                    y++; Interfaz.xy(x, y++); Console.WriteLine($"¿Está seguro que desea eliminar a este vendedor?");
+                    Interfaz.xy(x, y++); Console.Write("-Opción (SI/NO): ");
                     op = Console.ReadLine();
 
                     if (op.ToUpper() == "SI")
@@ -330,13 +349,13 @@ namespace Proyecto_Ferreteria_Marcelo
                         }
 
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("\nVendedor eliminado exitosamente");
+                        Interfaz.xy(x, y + 1); Console.WriteLine("Vendedor eliminado exitosamente");
                         Console.ResetColor();
                     }
                     else if (op.ToUpper() == "NO")
                     {
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        Console.WriteLine("\nOperación cancelada");
+                        Interfaz.xy(x, y + 1); Console.WriteLine("Operación cancelada");
                         Console.ResetColor();
                     }
                     else
@@ -347,7 +366,7 @@ namespace Proyecto_Ferreteria_Marcelo
             }
             else
             {
-                Interfaz.Error("No se encontró ningún vendedor con ese nombre");
+                Interfaz.xy(x, y + 1); Interfaz.Error("No se encontró ningún vendedor con ese nombre");
             }
             Interfaz.Continuar();
         }

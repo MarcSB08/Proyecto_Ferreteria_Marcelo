@@ -52,8 +52,8 @@ namespace Proyecto_Ferreteria_Marcelo
                         Interfaz.Continuar();
                         break;
                     default:
-                        Interfaz.Error("Opción no válida");
-                        Interfaz.Continuar();
+                        Interfaz.xy(16, 23); Interfaz.Error("Opción no válida");
+                        Console.ReadKey();
                         break;
                 }
             } while (opcion != "0");

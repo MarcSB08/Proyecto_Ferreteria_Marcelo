@@ -13,18 +13,21 @@ namespace Proyecto_Ferreteria_Marcelo
         public static string Menu_Principal()
         {
             Console.Clear();
-            Console.WriteLine("Seleccione una opción:\n");
-            Console.WriteLine("<1> Ingresar un Producto Nuevo");
-            Console.WriteLine("<2> Buscar un Producto por su Código");
-            Console.WriteLine("<3> Modificar el Stock y Precio de un Producto dado");
-            Console.WriteLine("<4> Procesar una Venta");
-            Console.WriteLine("<5> Eliminar un Producto dado su Código");
-            Console.WriteLine("<6> Contratar a un Vendedor");
-            Console.WriteLine("<7> Eliminar a un Vendedor");
-            Console.WriteLine("<8> Listas");
-            Console.WriteLine("<ADMIN> Eliminar todos los datos registrados");
-            Console.WriteLine("<0> Salir");
-            Console.Write("\nOpción: ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Borde(); Console.ResetColor();
+
+            xy(48, 4); Console.Write("===FERRETERIA IZANAGI===");
+            xy(15, 8); Console.WriteLine("<1> Ingresar un Producto Nuevo");
+            xy(15, 9); Console.WriteLine("<2> Buscar un Producto por su Código");
+            xy(15, 10); Console.WriteLine("<3> Modificar el Stock y Precio de un Producto dado");
+            xy(15, 11); Console.WriteLine("<4> Procesar una Venta");
+            xy(15, 12); Console.WriteLine("<5> Eliminar un Producto dado su Código");
+            xy(15, 13); Console.WriteLine("<6> Contratar a un Vendedor");
+            xy(15, 14); Console.WriteLine("<7> Eliminar a un Vendedor");
+            xy(15, 15); Console.WriteLine("<8> Listas");
+            xy(15, 16); Console.WriteLine("<0> Salir");
+            xy(62, 23); Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("<ADMIN> Eliminar todos los datos registrados");
+            xy(8, 23); Console.ResetColor(); Console.Write("Opción: ");
             string opcion = Console.ReadLine();
 
             return opcion;
@@ -80,16 +83,21 @@ namespace Proyecto_Ferreteria_Marcelo
             }
         }
 
+        public static void xy(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+        }
+
         public static void Error(string mensaje)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"ERROR: {mensaje}.");
+            Console.Write($"ERROR: {mensaje}");
             Console.ResetColor();
         }
 
         public static void Continuar()
         {
-            Console.Write("\nPresione cualquier tecla para continuar...");
+            Interfaz.xy(8, 23); Console.Write("Presione cualquier tecla para continuar...");
             Console.ReadKey();
         }
 

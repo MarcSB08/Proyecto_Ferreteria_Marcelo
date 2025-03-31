@@ -49,8 +49,9 @@ namespace Proyecto_Ferreteria_Marcelo
             Vendidos += cantidad;
         }
 
-        public static double ValidarPrecio()
+        public static double ValidarPrecio(int y)
         {
+            int x = 8;
             double precio = 0;
             bool key = false;
             string msj = "";
@@ -59,11 +60,13 @@ namespace Proyecto_Ferreteria_Marcelo
             {
                 if (key)
                 {
-                    Interfaz.Error(msj);
+                    Interfaz.xy(x, y); Interfaz.Error(msj);
+                    Console.ReadKey();
+                    Interfaz.xy(x, y); Console.Write("                                               ");
                 }
                 try
                 {
-                    Console.Write("-Ingrese el precio del producto: ");
+                    Interfaz.xy(x, y); Console.Write("-Ingrese el precio del producto: ");
                     precio = double.Parse(Console.ReadLine());
                     if (precio < 0)
                     {
@@ -85,8 +88,9 @@ namespace Proyecto_Ferreteria_Marcelo
             return precio;
         }
 
-        public static int ValidarCantidad(int stock_actual)
+        public static int ValidarCantidad(int stock_actual, int y)
         {
+            int x = 8;
             int cantidad = 0;
             bool key = false;
             string msj = "";
@@ -95,11 +99,13 @@ namespace Proyecto_Ferreteria_Marcelo
             {
                 if (key)
                 {
-                    Interfaz.Error(msj);
+                    Interfaz.xy(x, y); Interfaz.Error(msj);
+                    Console.ReadKey();
+                    Interfaz.xy(x, y); Console.Write("                                               ");
                 }
                 try
                 {
-                    Console.Write("-Ingrese la cantidad: ");
+                    Interfaz.xy(x, y); Console.Write("-Ingrese la cantidad: ");
                     cantidad = int.Parse(Console.ReadLine());
                     if (cantidad < 0)
                     {
@@ -126,8 +132,9 @@ namespace Proyecto_Ferreteria_Marcelo
             return cantidad;
         }
 
-        public static int ValidarStockActual()
+        public static int ValidarStockActual(int y)
         {
+            int x = 8;
             int stock_actual = 0;
             bool key = false;
             string msj = "";
@@ -136,11 +143,13 @@ namespace Proyecto_Ferreteria_Marcelo
             {
                 if (key)
                 {
-                    Interfaz.Error(msj);
+                    Interfaz.xy(x, y); Interfaz.Error(msj);
+                    Console.ReadKey();
+                    Interfaz.xy(x, y); Console.Write("                                                           ");
                 }
                 try
                 {
-                    Console.Write("-Ingrese el stock actual del producto: ");
+                    Interfaz.xy(x, y); Console.Write("-Ingrese el stock actual: ");
                     stock_actual = int.Parse(Console.ReadLine());
                     if (stock_actual < 0)
                     {
@@ -162,8 +171,9 @@ namespace Proyecto_Ferreteria_Marcelo
             return stock_actual;
         }
 
-        public static int ValidarStockMinimo(int stock_actual)
+        public static int ValidarStockMinimo(int stock_actual, int y)
         {
+            int x = 8;
             int stock_minimo = 0;
             bool key = false;
             string msj = "";
@@ -172,11 +182,13 @@ namespace Proyecto_Ferreteria_Marcelo
             {
                 if (key)
                 {
-                    Interfaz.Error(msj);
+                    Interfaz.xy(x, y); Interfaz.Error(msj);
+                    Console.ReadKey();
+                    Interfaz.xy(x, y); Console.Write("                                                             ");
                 }
                 try
                 {
-                    Console.Write("-Ingrese el stock mínimo del producto: ");
+                    Interfaz.xy(x, y); Console.Write("-Ingrese el stock mínimo: ");
                     stock_minimo = int.Parse(Console.ReadLine());
                     if (stock_minimo < 0)
                     {
