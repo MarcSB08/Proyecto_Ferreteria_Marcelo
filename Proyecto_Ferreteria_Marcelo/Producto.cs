@@ -60,13 +60,13 @@ namespace Proyecto_Ferreteria_Marcelo
             {
                 if (key)
                 {
-                    Interfaz.xy(x, y); Interfaz.Error(msj);
+                    Interfaz.XY(x, y); Interfaz.Error(msj);
                     Console.ReadKey();
-                    Interfaz.xy(x, y); Console.Write("                                               ");
+                    Interfaz.XY(x, y); Console.Write("                                               ");
                 }
                 try
                 {
-                    Interfaz.xy(x, y); Console.Write("-Ingrese el precio ($): ");
+                    Interfaz.XY(x, y); Console.Write("-Ingrese el precio ($): ");
                     precio = double.Parse(Console.ReadLine());
                     if (precio <= 0)
                     {
@@ -99,13 +99,13 @@ namespace Proyecto_Ferreteria_Marcelo
             {
                 if (key)
                 {
-                    Interfaz.xy(x, y); Interfaz.Error(msj);
+                    Interfaz.XY(x, y); Interfaz.Error(msj);
                     Console.ReadKey();
-                    Interfaz.xy(x, y); Console.Write("                                                              ");
+                    Interfaz.XY(x, y); Console.Write("                                                              ");
                 }
                 try
                 {
-                    Interfaz.xy(x, y); Console.Write("-Ingrese la cantidad del producto: ");
+                    Interfaz.XY(x, y); Console.Write("-Ingrese la cantidad del producto: ");
                     cantidad = int.Parse(Console.ReadLine());
                     if (cantidad <= 0)
                     {
@@ -132,10 +132,10 @@ namespace Proyecto_Ferreteria_Marcelo
             return cantidad;
         }
 
-        public static int ValidarStockActual(int y)
+        public static int ValidarStock(int y)
         {
             int x = 8;
-            int stock_actual = 0;
+            int stock = 0;
             bool key = false;
             string msj = "";
 
@@ -143,17 +143,17 @@ namespace Proyecto_Ferreteria_Marcelo
             {
                 if (key)
                 {
-                    Interfaz.xy(x, y); Interfaz.Error(msj);
+                    Interfaz.XY(x, y); Interfaz.Error(msj);
                     Console.ReadKey();
-                    Interfaz.xy(x, y); Console.Write("                                                           ");
+                    Interfaz.XY(x, y); Console.Write("                                                           ");
                 }
                 try
                 {
-                    Interfaz.xy(x, y); Console.Write("-Ingrese el stock actual: ");
-                    stock_actual = int.Parse(Console.ReadLine());
-                    if (stock_actual <= 0)
+                    Interfaz.XY(x, y); Console.Write("-Ingrese el stock: ");
+                    stock = int.Parse(Console.ReadLine());
+                    if (stock < 0)
                     {
-                        msj = "El stock actual ingresado es inválido";
+                        msj = "El stock ingresado es inválido";
                         key = true;
                     }
                     else
@@ -168,51 +168,7 @@ namespace Proyecto_Ferreteria_Marcelo
                 }
             } while (key);
 
-            return stock_actual;
-        }
-
-        public static int ValidarStockMinimo(int stock_actual, int y)
-        {
-            int x = 8;
-            int stock_minimo = 0;
-            bool key = false;
-            string msj = "";
-
-            do
-            {
-                if (key)
-                {
-                    Interfaz.xy(x, y); Interfaz.Error(msj);
-                    Console.ReadKey();
-                    Interfaz.xy(x, y); Console.Write("                                                             ");
-                }
-                try
-                {
-                    Interfaz.xy(x, y); Console.Write("-Ingrese el stock mínimo: ");
-                    stock_minimo = int.Parse(Console.ReadLine());
-                    if (stock_minimo < 0)
-                    {
-                        msj = "El stock mínimo ingresado es inválido";
-                        key = true;
-                    }
-                    else if(stock_minimo > stock_actual)
-                    {
-                        msj = "El stock mínimo no puede ser mayor que el stock actual";
-                        key = true;
-                    }
-                    else
-                    {
-                        key = false;
-                    }
-                }
-                catch (FormatException)
-                {
-                    msj = "El formato ingresado no es correcto";
-                    key = true;
-                }
-            } while (key);
-
-            return stock_minimo;
+            return stock;
         }
 
         #endregion

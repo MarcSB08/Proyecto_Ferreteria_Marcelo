@@ -51,7 +51,7 @@ namespace Proyecto_Ferreteria_Marcelo
                         Interfaz.ImprimirLogoUSM();
                         break;
                     default:
-                        Interfaz.xy(16, 23); Interfaz.Error("Opción no válida");
+                        Interfaz.XY(16, 23); Interfaz.Error("Opción no válida");
                         Console.ReadKey();
                         break;
                 }
@@ -84,7 +84,7 @@ namespace Proyecto_Ferreteria_Marcelo
                     case "0":
                         break;
                     default:
-                        Interfaz.xy(16, 23); Interfaz.Error("Opción no válida");
+                        Interfaz.XY(16, 23); Interfaz.Error("Opción no válida");
                         Console.ReadKey();
                         break;
                 }

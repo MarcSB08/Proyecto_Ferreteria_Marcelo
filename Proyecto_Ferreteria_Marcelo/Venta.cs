@@ -46,15 +46,15 @@ namespace Proyecto_Ferreteria_Marcelo
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Interfaz.Borde(); Console.ResetColor();
-            Interfaz.xy(x, y++); Console.WriteLine("===FACTURA DE VENTA===");
-            Interfaz.xy(x, y++); Console.WriteLine($"Fecha: {Fecha}");
-            Interfaz.xy(x, y++); Console.WriteLine($"Producto: {ProductoVendido.Nombre}");
-            Interfaz.xy(x, y++); Console.WriteLine($"Código: {ProductoVendido.Codigo}");
-            Interfaz.xy(x, y++); Console.WriteLine($"Precio unitario: ${ProductoVendido.Precio}");
-            Interfaz.xy(x, y++); Console.WriteLine($"Cantidad: {Cantidad}");
-            Interfaz.xy(x, y++); Console.WriteLine($"Vendedor: {Vendedor.Nombre} (Ventas: {Vendedor.VentasRealizadas})");
-            Interfaz.xy(x, y++); Console.WriteLine("--------------------------");
-            Interfaz.xy(x, y++); Console.WriteLine($"TOTAL A PAGAR: ${CalcularTotal()}");
+            Interfaz.XY(x, y++); Console.WriteLine("===FACTURA DE VENTA===");
+            Interfaz.XY(x, y++); Console.WriteLine($"Fecha: {Fecha}");
+            Interfaz.XY(x, y++); Console.WriteLine($"Producto: {ProductoVendido.Nombre}");
+            Interfaz.XY(x, y++); Console.WriteLine($"Código: {ProductoVendido.Codigo}");
+            Interfaz.XY(x, y++); Console.WriteLine($"Precio unitario: ${ProductoVendido.Precio}");
+            Interfaz.XY(x, y++); Console.WriteLine($"Cantidad: {Cantidad}");
+            Interfaz.XY(x, y++); Console.WriteLine($"Vendedor: {Vendedor.Nombre} (Ventas: {Vendedor.VentasRealizadas})");
+            Interfaz.XY(x, y++); Console.WriteLine("--------------------------");
+            Interfaz.XY(x, y++); Console.WriteLine($"TOTAL A PAGAR: ${CalcularTotal()}");
         }
 
         #endregion
