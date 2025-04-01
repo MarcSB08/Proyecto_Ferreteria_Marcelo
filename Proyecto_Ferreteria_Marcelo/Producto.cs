@@ -66,11 +66,11 @@ namespace Proyecto_Ferreteria_Marcelo
                 }
                 try
                 {
-                    Interfaz.xy(x, y); Console.Write("-Ingrese el precio del producto: ");
+                    Interfaz.xy(x, y); Console.Write("-Ingrese el precio ($): ");
                     precio = double.Parse(Console.ReadLine());
-                    if (precio < 0)
+                    if (precio <= 0)
                     {
-                        msj = "El precio no puede ser negativo";
+                        msj = "El precio ingresado es inválido";
                         key = true;
                     }
                     else
@@ -101,20 +101,20 @@ namespace Proyecto_Ferreteria_Marcelo
                 {
                     Interfaz.xy(x, y); Interfaz.Error(msj);
                     Console.ReadKey();
-                    Interfaz.xy(x, y); Console.Write("                                               ");
+                    Interfaz.xy(x, y); Console.Write("                                                              ");
                 }
                 try
                 {
-                    Interfaz.xy(x, y); Console.Write("-Ingrese la cantidad: ");
+                    Interfaz.xy(x, y); Console.Write("-Ingrese la cantidad del producto: ");
                     cantidad = int.Parse(Console.ReadLine());
-                    if (cantidad < 0)
+                    if (cantidad <= 0)
                     {
-                        msj = "La cantidad no puede ser negativa";
+                        msj = "La cantidad ingresada es inválida";
                         key = true;
                     }
                     else if (cantidad > stock_actual)
                     {
-                        msj = "La cantidad no puede ser mayor que el stock disponible";
+                        msj = "Cantidad no puede superar el stock disponible";
                         key = true;
                     }
                     else
@@ -151,9 +151,9 @@ namespace Proyecto_Ferreteria_Marcelo
                 {
                     Interfaz.xy(x, y); Console.Write("-Ingrese el stock actual: ");
                     stock_actual = int.Parse(Console.ReadLine());
-                    if (stock_actual < 0)
+                    if (stock_actual <= 0)
                     {
-                        msj = "El stock actual no puede ser negativo";
+                        msj = "El stock actual ingresado es inválido";
                         key = true;
                     }
                     else
@@ -192,7 +192,7 @@ namespace Proyecto_Ferreteria_Marcelo
                     stock_minimo = int.Parse(Console.ReadLine());
                     if (stock_minimo < 0)
                     {
-                        msj = "El stock mínimo no puede ser negativo";
+                        msj = "El stock mínimo ingresado es inválido";
                         key = true;
                     }
                     else if(stock_minimo > stock_actual)

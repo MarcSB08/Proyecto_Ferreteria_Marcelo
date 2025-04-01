@@ -41,16 +41,20 @@ namespace Proyecto_Ferreteria_Marcelo
 
         public void GenerarFactura()
         {
+            int x = 8, y = 5;
+
             Console.Clear();
-            Console.WriteLine("===FACTURA DE VENTA===");
-            Console.WriteLine($"Fecha: {Fecha}");
-            Console.WriteLine($"Producto: {ProductoVendido.Nombre}");
-            Console.WriteLine($"Código: {ProductoVendido.Codigo}");
-            Console.WriteLine($"Precio unitario: {ProductoVendido.Precio}$");
-            Console.WriteLine($"Cantidad: {Cantidad}");
-            Console.WriteLine($"Vendedor: {Vendedor.Nombre} (Ventas: {Vendedor.VentasRealizadas})");
-            Console.WriteLine("--------------------------");
-            Console.WriteLine($"TOTAL A PAGAR: {CalcularTotal()}$");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Interfaz.Borde(); Console.ResetColor();
+            Interfaz.xy(x, y++); Console.WriteLine("===FACTURA DE VENTA===");
+            Interfaz.xy(x, y++); Console.WriteLine($"Fecha: {Fecha}");
+            Interfaz.xy(x, y++); Console.WriteLine($"Producto: {ProductoVendido.Nombre}");
+            Interfaz.xy(x, y++); Console.WriteLine($"Código: {ProductoVendido.Codigo}");
+            Interfaz.xy(x, y++); Console.WriteLine($"Precio unitario: ${ProductoVendido.Precio}");
+            Interfaz.xy(x, y++); Console.WriteLine($"Cantidad: {Cantidad}");
+            Interfaz.xy(x, y++); Console.WriteLine($"Vendedor: {Vendedor.Nombre} (Ventas: {Vendedor.VentasRealizadas})");
+            Interfaz.xy(x, y++); Console.WriteLine("--------------------------");
+            Interfaz.xy(x, y++); Console.WriteLine($"TOTAL A PAGAR: ${CalcularTotal()}");
         }
 
         #endregion

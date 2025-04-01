@@ -10,7 +10,7 @@ namespace Proyecto_Ferreteria_Marcelo
     {
         #region Métodos
 
-        public void Inicio()
+        public void Bienvenido()
         {
             Inventario inventario = new Inventario();
             string opcion;
@@ -47,9 +47,8 @@ namespace Proyecto_Ferreteria_Marcelo
                         inventario.EliminarTodo();
                         break;
                     case "0":
-                        Console.Clear();
-                        Console.WriteLine("Gracias por utilizar el programa :D");
-                        Interfaz.Continuar();
+                        Interfaz.Adios();
+                        Interfaz.ImprimirLogoUSM();
                         break;
                     default:
                         Interfaz.xy(16, 23); Interfaz.Error("Opción no válida");
@@ -85,8 +84,8 @@ namespace Proyecto_Ferreteria_Marcelo
                     case "0":
                         break;
                     default:
-                        Interfaz.Error("Opción no válida");
-                        Interfaz.Continuar();
+                        Interfaz.xy(16, 23); Interfaz.Error("Opción no válida");
+                        Console.ReadKey();
                         break;
                 }
             } while (opcion != "0");

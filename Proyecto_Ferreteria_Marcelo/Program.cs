@@ -12,7 +12,7 @@ namespace Proyecto_Ferreteria_Marcelo
         {
             Console.OutputEncoding = Encoding.UTF8;
             Ferreteria ferreteria = new Ferreteria();
-            ferreteria.Inicio();
+            ferreteria.Bienvenido();
         }
     }
 }
