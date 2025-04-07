@@ -10,10 +10,14 @@ namespace Proyecto_Ferreteria_Marcelo
 {
     public static class Archivo
     {
-        #region Métodos
+        #region Atributos
 
         private static readonly string Directorio = AppDomain.CurrentDomain.BaseDirectory;
         private static readonly BinaryFormatter Formateador = new BinaryFormatter();
+
+        #endregion
+
+        #region Métodos
 
         public static void Guardar<T>(List<T> datos, string nombre_archivo)
         {
